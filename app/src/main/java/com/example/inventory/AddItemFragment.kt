@@ -42,7 +42,7 @@ class AddItemFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddItemBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,9 +53,13 @@ class AddItemFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         // Hide keyboard.
+        hideKeyboard()
+        _binding = null
+    }
+
+    private fun hideKeyboard() {
         val inputMethodManager = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as
                 InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
-        _binding = null
     }
 }
