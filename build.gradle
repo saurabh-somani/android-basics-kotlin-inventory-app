@@ -26,7 +26,7 @@ buildscript {
         lifecycle_version = '2.5.1'
         material_version = '1.6.1'
         nav_version = '2.5.1'
-        room_version = '2.3.0'
+        room_version = '2.4.3'
     }
     repositories {
         google()
