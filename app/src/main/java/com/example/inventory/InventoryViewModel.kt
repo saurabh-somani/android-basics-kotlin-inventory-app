@@ -12,8 +12,18 @@ class InventoryViewModel(
 ) : ViewModel() {
 
     fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
-        val item = getNewItemEntry(itemName, itemPrice, itemCount)
-        insertItem(item)
+        if (isEntryValid(itemName, itemPrice, itemCount)) {
+            val item = getNewItemEntry(itemName, itemPrice, itemCount)
+            insertItem(item)
+        }
+    }
+
+    private fun isEntryValid(itemName: String, itemPrice: String, itemCount: String): Boolean {
+        if (itemName.isEmpty() || itemPrice.isEmpty() || itemCount.isEmpty()) {
+            return false
+        }
+
+        return true
     }
 
     private fun insertItem(item: Item) {
