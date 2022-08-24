@@ -58,6 +58,12 @@ class InventoryViewModel(
             itemDao.update(item)
         }
     }
+
+    fun deleteItem(item: Item) {
+        viewModelScope.launch {
+            itemDao.delete(item)
+        }
+    }
 }
 
 class InventoryViewModelFactory(
