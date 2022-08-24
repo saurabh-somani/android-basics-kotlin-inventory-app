@@ -1,8 +1,6 @@
 package com.example.inventory
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
 import kotlinx.coroutines.launch
@@ -10,6 +8,8 @@ import kotlinx.coroutines.launch
 class InventoryViewModel(
     private val itemDao: ItemDao
 ) : ViewModel() {
+
+    val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
 
     fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
         if (isEntryValid(itemName, itemPrice, itemCount)) {
@@ -38,6 +38,10 @@ class InventoryViewModel(
             itemPrice = itemPrice.toDouble(),
             quantityInStock = itemCount.toInt()
         )
+    }
+
+    fun retrieveItem(id: Int): LiveData<Item> {
+        return itemDao.getItem(id).asLiveData()
     }
 }
 
